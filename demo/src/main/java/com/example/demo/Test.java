@@ -82,7 +82,8 @@ public class Test {
 	
 	@GetMapping("/listproduct")
 	public String listProduct(Model model) {
-		List<Product> list = productRepository.findAll();					
+		List<Product> list = productRepository.findAll();			
+		
 		Optional<Klant>klant = klantRepository. findById((long) 1);	
 		Long id = klant.get().getId();
 		String name = klant.get().getName();
@@ -91,7 +92,9 @@ public class Test {
 		String telefoon = klant.get().getTelefoon();		
 		String land = klant.get().getLand();
 				
-		model.addAttribute("list",list);		
+		model.addAttribute("list",list);	
+		
+		System.out.println("Commit changes!");
 		
 		model.addAttribute("id", id);
 		model.addAttribute("name", name);
