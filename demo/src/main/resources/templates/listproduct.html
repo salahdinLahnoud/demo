@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Backoffice ---</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>  
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>  
+
+<div class="container">
+  <h1>Backoffice - Klant</h1>
+</div>
+<div id="exTab1" class="container">
+  <ul class="nav nav-pills">
+    <li class="active">
+      <a href="#1a" data-toggle="tab">KLANT DETAILS</a>
+    </li>
+    <li><a href="#2a" data-toggle="tab">VORIGE INSTALLATIE</a>
+    </li>
+    <li><a href="#3a" data-toggle="tab">KLANT OPMERKINGEN</a>
+    </li>
+    <li><a href="#4a" data-toggle="tab">KLANT ABONEMENT</a>
+    </li>
+  <li><a href="#5a" data-toggle="tab">KLANT FACTUREN</a>
+    </li>
+  </ul>
+
+  <div class="tab-content clearfix">
+    <div class="tab-pane in fade active" id="1a">
+ 		<div class="container">  
+        <h3>KLANT DETAILS</h3>         
+        <div class="container">
+    <div class="form-group"> 
+      <label class="control-label col-sm-2" for="email">KLANTID:</label>
+      <div class="col-md-4">
+        <input type="email" class="form-control" id="email"  th:value="${id}" name="email" disabled>
+      </div>
+      </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">NAME:</label>
+      <div class="col-md-4">          
+        <input type="" class="form-control" id="pwd"  th:value="${name}" name="pwd" disabled>
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2" for="email">BEDRIJF:</label>
+      <div class="col-md-4">
+        <input type="email" class="form-control" id="email" th:value="${bedrijf}" name="email" disabled>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">ADRES:</label>
+      <div class="col-md-4">          
+        <input type="" class="form-control" id="pwd" th:value="${adres}" name="pwd" disabled>
+      </div>
+    </div>
+       <div class="form-group">
+      <label class="control-label col-sm-2" for="email">POSTCODE:</label>
+      <div class="col-md-4">
+        <input type="email" class="form-control" id="email" th:value="${postcode}" name="email" disabled>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">TELEFOON:</label>
+      <div class="col-md-4">          
+        <input type="" class="form-control" id="pwd" th:value="${telefoon}" name="pwd" disabled>
+      </div>
+    </div>
+       <div class="form-group">
+      <label class="control-label col-sm-2" for="email">LAND:</label>
+      <div class="col-md-4">
+        <input type="email" class="form-control" id="email" th:value="${land}" name="email" disabled>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">EMAIL:</label>
+      <div class="col-md-4">          
+        <input type="" class="form-control" id="pwd" th:value="${land}" name="pwd" disabled>
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">FAX:</label>
+      <div class="col-md-4">          
+        <input type="" class="form-control" id="pwd" th:value="${land}" name="pwd" disabled>
+      </div>
+    </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="pwd">DIENSTEN:</label>       
+        <div class="col-md-4">
+            <textarea rows="4" size="30" class="form-control" th:text="${land}" disabled></textarea>  
+        </div>
+    </div>
+    
+     <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">MOBILE:</label>
+      <div class="col-md-4">          
+        <input type="" class="form-control" id="pwd" th:value="${land}" disabled>
+      </div>
+    </div>
+
+    
+</div>
+    </div>  
+    </div>
+    <div class="tab-pane fade" id="2a">
+    		<div class="container">  
+        <h3>VORIGE INSTALLATIES</h3>   
+        <!--Bootstrap Table using .table class-->  
+        <table class="table table-striped">  
+            <thead>  
+                <tr>  
+                    <th>BEDRIJF.</th>  
+                    <th>ADRES</th>  
+                    <th>DATUM</th>  
+                    <th>MEDEWERKER</th>
+                    <th>STATUS</th>  
+                </tr>  
+            </thead>  
+            <tbody>  
+                <tr th:each="lists : ${list}">
+                <td th:text="${lists.id}"></td>
+                <td th:text="${lists.name}"></td>
+                <td th:text="${lists.price}"></td>
+                <td>ACTION</td>
+                </tr>  
+            </tbody>  
+        </table>  
+    </div> 
+    
+    
+    </div>
+    <div class="tab-pane fade" id="3a">
+    		<div class="container">  
+        <h3>KLANT OPMERKING</h3>  
+        <!--Bootstrap Table using .table class-->  
+        <table class="table table-striped">  
+            <thead>  
+                <tr>  
+                    <th>BEDRIJF</th>  
+                    <th>ADRES</th>  
+                    <th>DATUM</th>  
+                    <th>MEDEWERKER</th>
+                    <th>STATUS</th>   
+                </tr>  
+            </thead>  
+            <tbody>  
+                <tr th:each="lists : ${list}">
+                <td th:text="${lists.id}"></td>
+                <td th:text="${lists.name}"></td>
+                <td th:text="${lists.price}"></td>
+                <td>ACTION</td>
+                </tr>  
+            </tbody>  
+        </table>  
+    </div> 
+    </div>
+    <div class="tab-pane fade" id="4a">
+      <div class="container">  
+        <h3>KLANT ABONNEMENT</h3> 
+         
+        <!--Bootstrap Table using .table class-->  
+        <table class="table table-striped">  
+            <thead>  
+                <tr>  
+                    <th>DATUM</th>  
+                    <th>MEDEWERKER</th>  
+                    <th>OPMERKING</th>  
+                    <th>VIEW</th>  
+                </tr>  
+            </thead>  
+            <tbody>  
+                <tr th:each="lists : ${list}">
+                <td th:text="${lists.id}"></td>
+                <td th:text="${lists.name}"></td>
+                <td th:text="${lists.price}"></td>
+                <td>ACTION</td>
+                </tr>  
+            </tbody>  
+        </table>  
+    </div> 
+    
+    </div>
+    
+    <div class="tab-pane fade" id="5a">
+      <div class="container">  
+        <h3>KLANT FACTUREN</h3> 
+         
+        <!--Bootstrap Table using .table class-->  
+        <table class="table table-striped">  
+            <thead>  
+                <tr>  
+                    <th>FACTUURNUMMER.</th>  
+                    <th>DATUM</th>
+                    <th>JAAR</th>
+                    <th>KOSTEN (INC BTW)</th>   
+                    <th>BETAALD</th>    
+                </tr>  
+            </thead>  
+            <tbody>  
+                <tr th:each="lists : ${list}">
+                <td th:text="${lists.id}"></td>
+                <td th:text="${lists.name}"></td>
+                <td th:text="${lists.price}"></td>
+                <td>BETAALD</td>
+                </tr>  
+            </tbody>  
+        </table>  
+    </div> 
+    </div>
+  </div>
+</div> 
+</body>
+</html>

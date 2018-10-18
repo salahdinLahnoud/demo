@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link type="text/css" rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet" th:href="@{https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css}" />
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script> -->
+<title>Home</title>
+</head>
+<body>
+<!--    The time now is: <b th:text="${execInfo.now.time}"></b>
+    <p th:text="${message}"></p>
+    <p th:text="${test}"></p>
+<table>
+ <tr th:each="lists : ${list}">
+    <td th:text="${lists.id}"></td>
+    <td th:text="${lists.name}"></td>
+ <td th:text="${lists.price}"></td>
+ </tr>	
+</table> -->
+
+<!-- <script th:inline="javascript">
+	$(document).ready( function () {
+		 var table = $('#todotable').DataTable({
+			"sAjaxSource": "/test",
+			"sAjaxDataProp": "",
+			"order": [[ 0, "asc" ]],
+			"columns": [
+				{ "data": "id"},
+				{ "data": "name"},
+				{ "data": "price"}				    
+			]
+		 })
+	});	
+	</script>
+ <table id="todotable" class="table table-striped">
+		<thead>
+		<tr>
+		  <th>ID</th>
+		  <th>NAME</th>
+		  <th>PRICE</th>
+		  </tr>  
+		</thead>
+    </table> -->
+    
+    
+    
+	<div align="center">
+		<a th:href="@{/displayBarGraph}">Bar-Graph</a><br /> <br /> 
+		<a th:href="@{/displayPieChart}">Pie-Chart</a>
+	</div>
+</body>
+</html>

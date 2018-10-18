@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>    
+    <meta charset="UTF-8" />
+    <title>Product Table</title>
+</head>
+<body>
+   The time now is: <b th:text="${execInfo.now.time}"></b>
+    <p th:text="welkom | ${message}"></p>
+    <p th:text="Welkom : | ${test}"></p>
+<table>
+ <tr th:each="lists : ${list}">
+    <td th:text="${lists.id}"></td>
+    <td th:text="${lists.name}"></td>
+ <td th:text="${lists.price}"></td>
+ </tr>	
+</table>  
+<!-- <script>
+$(document).ready( function () {
+	 var table = $('#example').DataTable({
+			"sAjaxSource": "/lijst",
+			"sAjaxDataProp": "",
+			"order": [[ 0, "asc" ]],
+			"aoColumns": [
+			    { "mData": "id"},
+		        { "mData": "name" },
+				{ "mData": "email" }
+			]
+	 })
+});
+</script> -->
+<!-- <script src="./js/datatable.js" th:src=“@{./js/datatable.js}”></script>
+<script src="/js/datatable.js" th:src=“@{/js/datatable.js}”></script>
+<script src="../js/datatable.js" th:src=“@{../js/datatable.js}”></script>
+<script src="src/main/resources/static/js/datatable.js" th:src=“@{.src/main/resources/static/js/datatable.js}”></script>
+<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </tfoot>
+    </table> -->
+</body>
+</html>
