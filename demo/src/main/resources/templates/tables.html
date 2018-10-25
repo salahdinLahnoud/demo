@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    
+<!-- <script>
+$(document).ready(function() {
+    $.ajax({
+        //url: "http://rest-service.guides.spring.io/greeting"
+        url: "/test/table"
+    }).then(function(data) {
+       $('.greeting-id').append(data.id);
+       $('.greeting-content').append(data.name);
+    });
+});
+</script> -->
+<body>
+ <!-- <div>
+            <p class="greeting-id">The ID is </p>
+            <p class="greeting-content">The content is </p>
+        </div>   -->
+        
+<script>
+	$(document).ready(function() {
+		var list = ${list};
+		$.each(list, function( index, value ) {
+			alert( index + ": " + value );
+		});
+		
+	});
+</script>
+        
+        
+        
+        
+  
+</body>
+
+</html>

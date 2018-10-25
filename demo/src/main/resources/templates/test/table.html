@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1" />
+	<title>Spring Boot + JPA + Datatables</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<!--<script>
+$(document).ready( function () {
+	 var table = $('#employeesTable').DataTable({
+			"sAjaxSource": "/table",
+			"sAjaxDataProp": "",
+			"order": [[ 0, "asc" ]],
+			"aoColumns": [
+			    { "mData": "id"},
+		      { "mData": "name" },
+				  { "mData": "bedrijf" },
+				  { "mData": "adres" },
+				  { "mData": "postcode" },
+				  { "mData": "telefoon" },
+				  {"mData": "land"}
+			]
+	 })
+});
+</script> -->
+</head>
+
+<body>
+	<h1>KLant Table</h1>
+	<table id="employeesTable" class="display">
+      
+       <!-- Header Table -->
+       <thead>
+            <tr>
+                <th>Id</th>
+				<th>Name</th>
+                <th>Bedrijf</th>
+                <th>Adres</th>
+                <th>postcode</th>
+                <th>telefoon</th>
+                <th>Land</th>
+            </tr>
+        </thead>
+        <!-- Footer Table -->
+        <tfoot>
+            <tr>
+                <th>Id</th>
+				<th>Name</th>
+                <th>Bedrijf</th>
+                <th>Adres</th>
+                <th>postcode</th>
+                <th>telefoon</th>
+                <th>Land</th>
+            </tr>
+        </tfoot>
+    </table>
+    
+ <!--    <script>
+    $(document).ready(function() {
+        $('#employeesTable').DataTable({
+            "serverSide": true,
+            lengthChange : false,
+            ordering : false,
+            paging : true,
+            pagingType : "full_numbers",
+            processing : true,
+            autoWidth : true,
+            ajax: {
+                url: '/test/table',
+                dataSrc: 'data'
+            },
+
+            columns: [
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'bedrijf' },
+                { data: 'adres' },
+                { data: 'postcode' },
+                { data: 'telefoon' },
+                { data: 'land' }
+            ]
+        });
+    });
+</script>
+     -->
+    
+    
+</body>
+</html>
+
+

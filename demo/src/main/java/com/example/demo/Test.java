@@ -80,9 +80,20 @@ public class Test {
 		return "pieChart";
    }
 	
+	@GetMapping("/test")
+	public String list(Model model) {
+		List<Klant> list = klantRepository.findAll();
+		model.addAttribute("list", list);
+		return "klant";
+   }
+	
+	
+	
+	
 	@GetMapping("/listproduct")
 	public String listProduct(Model model) {
 		List<Product> list = productRepository.findAll();			
+		List<Klant>klantlijst = klantRepository.findAll();
 		
 		Optional<Klant>klant = klantRepository. findById((long) 1);	
 		Long id = klant.get().getId();
@@ -93,7 +104,7 @@ public class Test {
 		String land = klant.get().getLand();
 				
 		model.addAttribute("list",list);	
-		
+		model.addAttribute("klantlijst", klantlijst);
 		System.out.println("Commit changes!");
 		
 		model.addAttribute("id", id);
@@ -105,6 +116,42 @@ public class Test {
 		
 		return "listproduct";
 	} 
+	
+	@GetMapping("/zoeken")
+	public String search() {
+		return "search";
+	}
+	
+	@GetMapping("/tablen")
+	public String table() {
+		return "tables";
+	}
+
+	@GetMapping("/kalender")
+	public String Calendar() {
+		return "calendar";
+	}
+	
+	@GetMapping("/form")
+	public String formKlant(Model model) {
+		List<Klant>klantlist = klantRepository.findAll();
+		List<Product> list = productRepository.findAll();	
+		Map<String, Double> surveyMap = new LinkedHashMap<>();
+		String name = null;
+		double price = 0.0;
+		list.stream().map(p -> new Product(p.getName(), p.getPrice())).collect(Collectors.toList());
+		for(Product p : list) {
+			name = p.getName();
+			price = p.getPrice();
+			surveyMap.put(name , price);
+		}
+		
+		model.addAttribute("surveyMap", surveyMap);	
+		model.addAttribute("klant", new Klant());
+		model.addAttribute("klantlist", klantlist);
+		return "addKlant";
+	}
+	
 	
 /*//			
 //	@RequestMapping(path="/lijst", method = RequestMethod.GET)

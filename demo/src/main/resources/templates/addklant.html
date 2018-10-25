@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Backoffice----</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>  
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>  
+<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>  
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+
+<style>
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #999999;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+body > .container-fluid {
+  padding-top: 50px;
+}
+.container-fluid .col-sm-6 {
+  padding: 0;
+}
+.navbar {
+  margin-bottom: 0;
+}
+.footer {
+  padding: 15px 0;
+}
+
+.main-content {
+  background: #efefef;
+  padding: 20px;
+  height: 100%;
+  min-height: 100%;
+}
+
+
+.quad{
+width:50%;
+height:100%;
+float:left;
+}
+.line{
+height:50%;
+width:100%;
+}
+  
+
+.equal, .equal > div[class*='col-'] {  
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      flex:1 0 auto;
+  }
+
+</style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Backoffice ---</a>
+        </div>
+    </div>
+</nav>
+<div class="line">
+  <div class="col-md-4 quad" style="background-color:white;">
+    <div class="container">
+   <div class="col-lg-8">
+   <fieldset>
+      <legend>Add klant Information</legend>
+    <form class="form-horizontal" role="form" th:action="@{saveKlant}" method="post" th:object="${klant}">
+     <div class="form-group">
+        <label for="name" class="col-lg-3 control-label">Name</label>
+        <div class="col-lg-6">
+          <input type="text" class="form-control" th:field="*{name}" name="name" id="name" placeholder="Name">
+        </div>
+      </div> 
+      <div class="form-group">
+        <label for="bedrijf" class="col-lg-3 control-label">Bedrijf</label>
+        <div class="col-lg-6">
+          <input type="text" class="form-control" th:field="*{bedrijf}" name="bedrijf" id="bedrijf" placeholder="Bedrijf">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="adres" class="col-lg-3 control-label">Adres</label>
+        <div class="col-lg-6">
+          <input type="text" class="form-control" th:field="*{adres}" name="adres" id="adres" placeholder="Adres">
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <label for="postcode" class="col-lg-3 control-label">Postcode</label>
+        <div class="col-lg-6">
+          <input type="text" class="form-control" th:field="*{postcode}" name="postcode" id="postcode" placeholder="Postcode">
+        </div>
+      </div>
+      
+        <div class="form-group">
+        <label for="telefoon" class="col-lg-3 control-label">Telefoon</label>
+        <div class="col-lg-6">
+          <input type="text" class="form-control" th:field="*{telefoon}" name="telefoon" id="telefoon" placeholder="Telefoon">
+        </div>
+      </div>
+     
+        <div class="form-group">
+        <label for="land" class="col-lg-3 control-label">Land</label>
+        <div class="col-lg-6">
+          <input type="text" class="form-control" th:field="*{land}" name="land" id="land" placeholder="Land">
+        </div>
+      </div> 
+      
+    
+      <div class="form-group">
+        <div class="col-lg-offset-3 col-lg-10">
+          <button type="submit" class="btn btn-success">Save</button> <a href="" class="btn btn-primary">Cancel</a>
+        </div>
+      </div>
+    </form>
+   </fieldset>
+        </div>
+ 
+ <div class="line">
+  <div class="col-md-4 quad" style="background-color:white;">
+    <div class="container">
+   <div class="col-lg-8">
+   
+   </div></div></div></div>
+ 
+ 
+ 
+  <div class="col-md-6 quad" style="background-color:white;">
+    
+    <legend>Klantlijst Information</legend>
+    <table class="table table-striped" style="width:100%" id="datatableklant2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Bedrijf</th>
+                <th>Adres</th>
+                <th>Postcode</th>
+                <th>Telefoon</th>
+                <th>Land</th>
+            </tr>
+        </thead>
+         <tbody>  
+                <tr th:each="klist : ${klantlist}">
+                <td th:text="${klist.id}"></td>
+                <td th:text="${klist.name}"></td>
+                <td th:text="${klist.bedrijf}"></td>
+                <td th:text="${klist.adres}"></td>
+                <td th:text="${klist.postcode}"></td>
+                <td th:text="${klist.telefoon}"></td>
+                <td th:text="${klist.land}"></td>
+                </tr>  
+            </tbody> 
+        <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Bedrijf</th>
+                <th>Adres</th>
+                <th>Postcode</th>
+                <th>Telefoon</th>
+                <th>Land</th>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+    <div class="col-md-6 quad" style="background-color:white;">
+    <legend>KlantChart Information</legend>
+		<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script th:inline="javascript">
+    $(function(){
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Chart Data Installation'
+        },
+        subtitle: {
+            text: 'Installation Database details'
+        },
+        xAxis: {
+            categories: [[${surveyMap.keySet()}]],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            max:100,
+            title: {
+                text: 'Installation rating [in - %]'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} $</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Installation',
+            data: [[${surveyMap.values()}]]
+        }]
+    });
+    });
+</script>
+    </div>
+</div>
+  <script>
+$(document).ready(function() {
+    $('#datatableklant2').DataTable();
+});
+</script>
+  
+ </body>
+<footer class="footer">
+    <div class="container">
+        Sticky footer based on <a href="http://getbootstrap.com/examples/sticky-footer-navbar/">Boostrap example</a>.
+    </div>
+</footer>
+</html>
