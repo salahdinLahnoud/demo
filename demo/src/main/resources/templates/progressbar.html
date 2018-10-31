@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery-plugin-progressbar Demos</title>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+	<!-- <link rel="stylesheet" href="jQuery-plugin-progressbar.css"> -->	
+	<style>
+	
+	body { background-color:#ECF0F1;}
+.position {
+  float: left;
+  margin: 100px 20px;
+}
+
+.progress-bar {
+  position: relative;
+  height: 200px;
+  width: 200px;
+}
+
+.progress-bar div {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.progress-bar div span {
+  position: absolute;
+  font-family: Arial;
+  font-size: 25px;
+  line-height: 175px;
+  height: 175px;
+  width: 175px;
+  left: 12.5px;
+  top: 12.5px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.progress-bar .background { background-color: #b3cef6; }
+
+.progress-bar .rotate {
+  clip: rect(0 100px 200px 0);
+  background-color: #4b86db;
+}
+
+.progress-bar .left {
+  clip: rect(0 100px 200px 0);
+  opacity: 1;
+  background-color: #b3cef6;
+}
+
+.progress-bar .right {
+  clip: rect(0 100px 200px 0);
+  transform: rotate(180deg);
+  opacity: 0;
+  background-color: #4b86db;
+}
+ @keyframes 
+toggle {  0% {
+ opacity: 0;
+}
+ 100% {
+ opacity: 1;
+}
+}
+	
+	
+	
+	</style>
+	
+	
+	
+	
+	
+	<style>
+	
+	$circle-size: 100px;
+$background-color: #b3cef6; 
+$progress-color: #4b86db;
+$percent: 75;
+$duration: 2s;
+.position {
+	float: left;
+	margin: 100px 50px;
+}
+.progress-bar {
+	position: relative;
+	height: $circle-size;
+	width: $circle-size;
+	div {
+		position: absolute;
+		height: $circle-size;
+		width: $circle-size;
+		border-radius: 50%;
+			span {
+				position: absolute;
+				font-family: Arial;
+				font-size: $circle-size / 4;
+				line-height: $circle-size / 4 * 3;
+				height: $circle-size / 4 * 3;
+				width: $circle-size / 4 * 3;
+				left: $circle-size / 8;
+				top: $circle-size / 8;
+				text-align: center;
+				border-radius: 50%;
+				background-color: white;
+			}
+	}
+
+	.background {
+		background-color: $background-color;
+	}
+	.rotate {
+		clip: rect(0 ($circle-size / 2) $circle-size 0);
+		background-color: $progress-color;
+		// animation: rotate $duration linear;
+		// transform: rotate(-100deg);
+		// transition: all (2s * $percent / 100) linear;
+	}
+	.left {
+		clip: rect(0 ($circle-size / 2) $circle-size 0);
+		opacity: 1;
+		// animation: toggle ($duration / 2)  step-start;
+		background-color: $background-color;
+	}
+	.right {
+		clip: rect(0 ($circle-size / 2) $circle-size 0);
+		transform: rotate(180deg);
+		opacity: 0;
+		// animation: toggle ($duration / 2) step-end;
+		background-color: $progress-color;
+	}
+}
+
+// @keyframes rotate {
+// 	0%		{ transform: rotate(( -1 * $percent * 3.6) deg); }
+// }
+
+@keyframes toggle {
+	0%		{ opacity: 0; }
+	100%	{ opacity: 1; }
+}
+	
+	
+	
+	</style>
+	
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script>
+	
+	;
+	(function ($) {
+		$.fn.loading = function () {
+			var DEFAULTS = {
+				backgroundColor: '#b3cef6',
+				progressColor: '#4b86db',
+				percent: 75,
+				duration: 2000
+			};	
+			
+			$(this).each(function () {
+				var $target  = $(this);
+
+				var opts = {
+				backgroundColor: $target.data('color') ? $target.data('color').split(',')[0] : DEFAULTS.backgroundColor,
+				progressColor: $target.data('color') ? $target.data('color').split(',')[1] : DEFAULTS.progressColor,
+				percent: $target.data('percent') ? $target.data('percent') : DEFAULTS.percent,
+				duration: $target.data('duration') ? $target.data('duration') : DEFAULTS.duration
+				};
+				// console.log(opts);
+		
+				$target.append('<div class="background"></div><div class="rotate"></div><div class="left"></div><div class="right"></div><div class=""><span>' + opts.percent + '%</span></div>');
+		
+				$target.find('.background').css('background-color', opts.backgroundColor);
+				$target.find('.left').css('background-color', opts.backgroundColor);
+				$target.find('.rotate').css('background-color', opts.progressColor);
+				$target.find('.right').css('background-color', opts.progressColor);
+		
+				var $rotate = $target.find('.rotate');
+				setTimeout(function () {	
+					$rotate.css({
+						'transition': 'transform ' + opts.duration + 'ms linear',
+						'transform': 'rotate(' + opts.percent * 3.6 + 'deg)'
+					});
+				},1);		
+
+				if (opts.percent > 50) {
+					var animationRight = 'toggle ' + (opts.duration / opts.percent * 50) + 'ms step-end';
+					var animationLeft = 'toggle ' + (opts.duration / opts.percent * 50) + 'ms step-start';  
+					$target.find('.right').css({
+						animation: animationRight,
+						opacity: 1
+					});
+					$target.find('.left').css({
+						animation: animationLeft,
+						opacity: 0
+					});
+				} 
+			});
+		}
+	})(jQuery);
+	</script>
+</head>
+<body>
+<div id="jquery-script-menu">
+<div class="jquery-script-center">
+<!-- <ul>
+<li><a href="http://www.jqueryscript.net/loading/Dynamic-Circular-Progress-Bar-with-jQuery-CSS3.html">Download This Plugin</a></li>
+<li><a href="http://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul> -->
+
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+<h1 style="margin:150px auto 50px auto;">jQuery-plugin-progressbar Demos</h1>
+	<div class="progress-bar position"></div>
+	<div class="progress-bar position" data-percent="60" data-duration="1000" data-color="#ccc,yellow"></div>
+	<div class="progress-bar position" data-percent="20" data-color="#a456b1,#12b321"></div>
+	<input type="submit" value="reload">
+	<script>
+		$(".progress-bar").loading();
+		$('input').on('click', function () {
+			 $(".progress-bar").loading();
+		});
+	</script>
+
+</body>
+</html>

@@ -8,24 +8,54 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonWriter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
+
 @Controller
 public class Test {
+
 	private static final Logger logger = LoggerFactory.getLogger(Test.class);		
-//	
+	
 	@Autowired
 	private ProductRepository productRepository;
 
 	@Autowired
 	private KlantRepository klantRepository;
+	
+	
+	@Autowired
+	private CalendarRepository calendarRepository;
+	
+	@Autowired
+	private DataRepository dataRepository;
+	
 	
 //	@Autowired
 //	private UserService userService;
@@ -50,10 +80,10 @@ public class Test {
 //	}
 
 	
-	/*@GetMapping("/home")
-	public String welcome() {
-		return "home";
-	}*/
+	@GetMapping("/progress")
+	public String progressBar() {
+		return "progressbar";
+	}
 	
 	@GetMapping("/displayBarGraph")
 	public String barGraph(Model model) {
@@ -95,6 +125,68 @@ public class Test {
 		List<Product> list = productRepository.findAll();			
 		List<Klant>klantlijst = klantRepository.findAll();
 		
+//		Map<String , RestData> data = new LinkedHashMap<>();
+		
+
+//		List<String>listen = new ArrayList<>();
+//		String api ="";
+//	for (Map.Entry<String, RestData> entry : data.entrySet()) {			
+//		     api = entry.getValue().getApi();
+//		     listen.add(api);
+//		}
+
+//	String t ="";
+//	Long userId = null;
+//	Long uId = null;
+//	
+//		
+//	ObjectMapper mapper = new ObjectMapper();
+//	try {
+//		Data datas = mapper.readValue("https://jsonplaceholder.typicode.com/todos/1", Data.class);
+//		t = datas.getTitle();
+//		userId = datas.getUserId();
+//		uId = datas.getId();
+//		
+//	} catch (JsonParseException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	} catch (JsonMappingException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	} catch (IOException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+//	
+		//String output = null;
+		try {
+
+			URL url = new URL("https://jsonplaceholder.typicode.com/todos/1");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Accept", "application/json");
+			if (conn.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code:" + conn.getResponseCode());
+			}
+			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+			String output;
+			
+			while ((output = br.readLine()) != null) {
+				System.out.println(output);	
+				dataRepository.save(new Data(output));
+				model.addAttribute("data", output);				
+				logger.info(output);
+			}
+			
+			conn.disconnect();
+		  } catch (MalformedURLException e) {
+			e.printStackTrace();
+		  } catch (IOException e) {
+			e.printStackTrace();
+		  }
+		//return output;
+		//}
+
 		Optional<Klant>klant = klantRepository. findById((long) 1);	
 		Long id = klant.get().getId();
 		String name = klant.get().getName();
@@ -114,6 +206,9 @@ public class Test {
 		model.addAttribute("telefoon", telefoon);
 		model.addAttribute("land", land);
 		
+	//	model.addAttribute("data", t);
+		//System.out.println(t.toString());
+		
 		return "listproduct";
 	} 
 	
@@ -128,7 +223,36 @@ public class Test {
 	}
 
 	@GetMapping("/kalender")
-	public String Calendar() {
+	public String Calendar(Model model) {
+		List<Calendar>calendarLijst= calendarRepository.findAll();
+		
+		String title ="";
+		String start ="";
+		String end ="";
+		
+		Map<String, Calendar>map = new LinkedHashMap<>();
+		for (Map.Entry<String, Calendar> entry : map.entrySet()) {			
+			
+			title = entry.getValue().getTitle();
+			start = entry.getValue().getStart();
+			end =   entry.getValue().getEnd();
+			//System.out.println("k : " + entry.getKey() + " value : " + entry.getValue());
+		}
+		
+		for(Calendar c : calendarLijst) {	
+			title = c.getTitle();
+			start = c.getStart();
+			end = c.getEnd();
+			map.put("calendar", c);	
+		}
+			
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDateTime now = LocalDateTime.now();
+		 model.addAttribute("title", title);
+		 model.addAttribute("start", start);
+		 model.addAttribute("end", end);
+		 model.addAttribute("currentdate", now);
+		 model.addAttribute("calendar", map);
 		return "calendar";
 	}
 	
@@ -152,6 +276,23 @@ public class Test {
 		return "addKlant";
 	}
 	
+	
+	/*@RequestMapping(value = "/vacation/getVacation", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getVacation(HttpServletResponse response) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("id", 111);
+        map.put("title", "event1");
+        map.put("start", "2012-4-15");
+        map.put("url", "http://yahoo.com/");
+        // Convert to JSON string.
+        String json = new Gson().toJson(map);
+        // Write JSON string.
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        return json;
+    }*/
 	
 /*//			
 //	@RequestMapping(path="/lijst", method = RequestMethod.GET)
