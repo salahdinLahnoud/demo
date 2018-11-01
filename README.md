@@ -3,7 +3,7 @@
 
 
 <div align="center">
-    <a href="http://combostruct.com/3zHI" onclick="window.open('popup.html', 'windowname1','width=200, height=77');>
+    <a href="http://combostruct.com/3zHI">
         <img src="https://i.postimg.cc/FKT8x8J4/backoffice.png" width="400px"</img></a>
 </div>
 
