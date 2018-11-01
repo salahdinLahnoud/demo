@@ -3,7 +3,7 @@
 
 
 <div align="center">
-    <a href="http://combostruct.com/3zHI"  onclick="window.open('http://hespress.com','','width=700,height=700'");><img src="https://i.postimg.cc/FKT8x8J4/backoffice.png" width="400px"</img></a>
+    <a href="http://combostruct.com/3zHI"><img src="https://i.postimg.cc/FKT8x8J4/backoffice.png" width="400px"</img></a>
 </div>
 
 
