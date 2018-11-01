@@ -5,7 +5,7 @@
 <div align="center">
     <img src="https://i.postimg.cc/FKT8x8J4/backoffice.png" width="400px"</img> 
 </div>
-This site was built using [GitHub Pages](https://pages.github.com/).
+See more [Examples](https://pages.github.com/).
 
 <div align="center">
     <img src="https://i.postimg.cc/4NXvJdSW/test2.png" width="400px"</img> 
